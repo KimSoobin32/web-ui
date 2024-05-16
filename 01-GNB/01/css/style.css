@@ -38,10 +38,33 @@ header nav {
   z-index: 10;
 }
 
-.gnb li a {
+.gnb > li > a {
   border: 1px solid #fff;
   display: block;
   padding: 10px 40px;
+}
+
+.gnb > li {
+  position: relative;
+}
+
+.submenu {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  /* jQuery 동작을 만들기 위한 준비 
+  op0은 클래스 줬다뺐다할때 씀
+  그 이외는 dn 사용 */
+  display: none;
+}
+.submenu li a {
+  display: block;
+  border: 1px solid #ff0;
+  padding: 10px;
+  text-align: center;
+  background: #333;
+  color: #fff;
 }
 
 .inner {

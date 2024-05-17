@@ -1,0 +1,70 @@
+@charset 'utf-8';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+.faq-wrap {
+  width: 80%;
+  margin: 50px auto;
+  /* background: #ff5; */
+}
+
+.faq-wrap > ul > li {
+  border: 1px solid #000;
+  padding: 30px;
+  margin: 10px 0;
+}
+.faq-wrap > ul > li > strong {
+  /* background: #5f5; */
+  font-size: 1.2rem;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  min-height: 40px; /* 공간이 더 필요할 땐 자동으로 늘어남 */
+}
+.faq-wrap > ul > li > strong::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: #000;
+}
+.faq-wrap > ul > li > strong::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  /* background: #f00; */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotate(135deg);
+  /* 검사기에서 각도돌려볼 수 있음 */
+  transition: 0.3s;
+
+  border: solid #000;
+  border-width: 2px 2px 0 0;
+}
+
+.answer-wrap {
+  background: #f5f5f5;
+  padding: 30px;
+  margin-top: 20px;
+  display: none;
+}
+
+/* 선택한 질문에 대한 디자인 */
+.faq-wrap > ul > li.on > strong {
+  color: #f00;
+}
+.faq-wrap > ul > li.on > strong::after {
+  border-color: #f00;
+  transform: translateY(-50%) rotate(315deg);
+}

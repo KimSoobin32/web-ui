@@ -4,10 +4,14 @@ $(function () {
   const tabContent = $('.tab-con-item');
   const body = $('body');
 
-  //배경이미지를 배열에 저장
-  const bgArr = ['blackpink01.jpg', 'blackpink02.jpg', 'blackpink03.jpg'];
-  console.log(bgArr[0]);
-
+  //배경이미지와 텍스트 정보를 배열에 저장
+  const bgArr = [
+    { bg: 'blackpink01.jpg', title: '지수가 제일 예뻐요' },
+    { bg: 'blackpink02.jpg', title: '지수는 정말 예뻐요' },
+    { bg: 'blackpink03.jpg', title: '지수는 언제나 제일 예뻐요' },
+  ];
+  console.log(bgArr, bgArr[1].title);
+  // document.querySelector('h2').textContent = bgArr[1].title;
   //초기 세팅
   tabAction(0);
 
@@ -23,7 +27,10 @@ $(function () {
     //메서드 체인
     tabMenu.removeClass('on').eq(index).addClass('on');
     tabContent.hide().eq(index).show();
-
-    body.css('background', `url(./img/${bgArr[index]}) no-repeat 0 0 /cover`);
+    console.log(index);
+    //배경이미지 변경
+    body.css('background', `url(./img/${bgArr[index].bg}) no-repeat 0 0 /cover`);
+    //타이틀 변경
+    tabContent.find('h2').text(bgArr[index].title);
   }
 });

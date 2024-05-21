@@ -117,7 +117,11 @@
       //$selectList의 li를 클릭했을 때
       $selectList.find('li').on('click', function () {
         //클릭한 놈의 data-link속성의 값을 가져와서 변수에 저장
-        const linkValue = $(this).attr('data-link');
+        // const linkValue = $(this).attr('data-link');
+
+        // data('속성이름') : data-속성이름 의 속성이름을 가져오거나 세팅 (data-link ->속성이름은 link
+        const linkValue = $(this).data('link');
+
         //새 창 열기
         window.open(linkValue);
         //$selectList를 슬라이드 업

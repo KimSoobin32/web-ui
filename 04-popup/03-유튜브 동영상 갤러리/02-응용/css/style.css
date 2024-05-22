@@ -25,6 +25,16 @@ a:hover {
 body {
   font: 700 1rem/1.5 'Pretendard', sans-serif;
 }
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(7px);
+}
 
 .dim {
   position: fixed;
@@ -52,6 +62,8 @@ body {
 
   pointer-events: none;
   user-select: none;
+
+  z-index: 10;
 }
 .video-wrap.active {
   opacity: 1;
@@ -96,6 +108,8 @@ body {
 .video-list {
   display: flex;
   gap: 20px;
+  /* flex의 item은 z값 가질 수 있음 */
+  z-index: 1;
 }
 .video-list li {
   border: 5px solid #000;

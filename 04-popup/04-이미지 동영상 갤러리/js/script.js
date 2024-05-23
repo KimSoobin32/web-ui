@@ -6,6 +6,13 @@ $(function () {
   const $btnClose = $('.btn-close');
   const $galleryContent = $('.gallery-content');
   const duration = 300;
+
+  //브라우저 창 크기 구하기
+  const $window = $(window);
+  console.log($window.width()); /* 콘텐츠(window)의 가로크기 */
+  console.log($window.innerWidth()); /* 패딩 포함크기 */
+  console.log($window.outerWidth()); /* border, padding, margin 포함크기 */
+
   //선택해서 클릭하면 dim이 보이고, 팝업이 뜬다
   $gallery.on('click', function () {
     $dim.fadeIn();
@@ -29,15 +36,28 @@ $(function () {
     //선택한 상황에 따라서
     if (videoSrc) {
       //블랙핑크 이미지를 클릭한 상태
-      $galleryContent.html(`<iframe src="${videoSrc}">`);
+      $galleryContent.html(`<iframe src="${videoSrc}?autoplay=1" allow="autoplay">`);
+
+      //브라우저 창크기의 절반을 팝업창의 가로크기로 세팅
+      $popup.css('width', $window.outerWidth() / 2);
     } else {
       //티셔츠 이미지를 클릭한 상태
       $galleryContent.html(`<img src="${imgSrc}">`);
+      $popup.css('width', $window.outerWidth() / 3);
     }
+    //alt에 담긴 텍스트 뿌리기
+    //요소추가
+    // $galleryContent.prepend(imgTitle);
+    // $galleryContent.append(imgTitle);
+    $galleryContent.prepend(`<div class="gallery-title">${imgTitle}</div>`);
   });
   //닫기버튼을 클릭하면, 팝업창과 dim이 사라지게
   $btnClose.on('click', function () {
     $dim.fadeOut();
     $popup.removeClass('active');
+    //0.5초 후에 갤러리 콘텐츠를 초기화
+    setTimeout(function () {
+      $galleryContent.html('');
+    }, 500);
   });
 });

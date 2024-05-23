@@ -39,11 +39,11 @@ img {
   display: none;
 }
 .popup {
-  display: flex;
+  position: fixed;
   top: -50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
   opacity: 0;
   transition: 0.4s;
   background: #fff;

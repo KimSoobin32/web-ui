@@ -12,6 +12,9 @@ li {
 img {
   vertical-align: top;
 }
+body {
+  overflow: hidden;
+}
 #header {
   position: fixed;
   top: 0;

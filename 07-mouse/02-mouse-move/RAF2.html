@@ -33,10 +33,10 @@
     }
 
     .cat {
-      width: 245px;
-      height: 184px;
-      background: url(./img/cat.png) no-repeat 0 0;
-      animation: catRunning 0.4s infinite steps(6);
+      width: 258px;
+      height: 513px;
+      background: url(./img/walk.png) no-repeat 0 0;
+      animation: catRunning 0.8s infinite steps(8);
       /* steps(프레임수)-> 프레임별로 변환(애니메이션이 쭉 이어지지 않고 프레임 별로.. 만화 동작 효과)  */
     }
 
@@ -52,7 +52,7 @@
     /* 고양이가 달린다 */
     @keyframes catRunning {
       100% {
-        background-position: -1470px 0;
+        background-position: -2064px 0;
       }
     }
   </style>
@@ -72,8 +72,6 @@
 
     let xPos = 0;
     let raf;
-    let isRunning = false;
-
     function running() {
       // 고양이가 얼마나 달리고 있는지
       info.textContent = xPos;
@@ -85,7 +83,7 @@
 
       raf = requestAnimationFrame(running);
       //같은 효과인데 사용자 pc 시스템 최적화 되어 부드러운 움직임
-      if (xPos >= winWidth) {
+      if (xPos === winWidth) {
         xPos = 0;
       }
     }
@@ -93,19 +91,8 @@
 
     //화면을 클릭하면 고양이가 멈춘다
     window.addEventListener('click', function () {
-
-      //토글 효과->플래그 이용
-      if (!isRunning) {
-        cancelAnimationFrame(raf);
-        cat.style.animationPlayState = 'paused';
-        isRunning = true;
-      } else {
-        raf = requestAnimationFrame(running);
-        cat.style.animationPlayState = 'running';
-        isRunning = false;
-      }
-
-
+      cancelAnimationFrame(raf);
+      cat.style.animationPlayState = 'paused';
     })
   </script>
 </body>

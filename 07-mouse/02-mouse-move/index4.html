@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마우스 움직임에 따라 오브젝트 움직이기</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+
+    }
+
+    .obj-wrap {
+      width: 100%;
+      /* 뷰포트를 다 차지 h100vh */
+      height: 100vh;
+      background: rgb(255, 255, 213);
+      /* 3차원효과를 위한 세팅 - 부모한테 perspective 줘야 함 */
+      perspective: 600px;
+
+      overflow: hidden;
+    }
+
+    .obj1 {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      width: 200px;
+      height: 300px;
+      background: red;
+    }
+
+    .obj2 {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      width: 300px;
+      height: 400px;
+      background: orange;
+    }
+
+    .obj3 {
+      position: absolute;
+      top: 30%;
+      right: 30%;
+      width: 300px;
+      height: 300px;
+      background: yellow;
+    }
+
+    .obj4 {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      width: 300px;
+      height: 400px;
+      background: green;
+    }
+
+    .scroll-area {
+      border: 10px solid #eee;
+      padding: 5vw;
+      /* 뷰포트 두배 */
+      min-height: 200vh;
+    }
+  </style>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+  <script>
+    $(function () {
+      //대상을 변수에 저장
+      const $window = $(window);
+      const $objWrap = $('.obj-wrap');
+      const $obj1 = $objWrap.find('.obj1');
+      const $obj2 = $objWrap.find('.obj2');
+      const $obj3 = $objWrap.find('.obj3');
+      const $obj4 = $objWrap.find('.obj4');
+      //마우스 좌표값
+      let x = 0;
+      let y = 0;
+      //조정된 좌표값
+      let mx = 0;
+      let my = 0;
+      //기본 속도
+      let speed = 0.09;
+      //마우스가 움직이면 좌표의 시작점을 화면의 정중앙으로 세팅
+      //1. 함수로 정의
+      function getOffset() {
+        $window.on('mousemove', function (e) {
+          x = e.pageX - $window.outerWidth() / 2;
+          y = e.pageY - $window.outerHeight() / 2;
+        });
+
+      }
+
+      //2. 움직임 구현
+      function moving() {
+        //조정된 값 구하기
+        mx += (x - mx) * speed;
+        my += (y - my) * speed;
+        //대상에 값 적용
+        $obj1.css({
+          transform: `translate(${mx}px, ${my}px) scale(${my * 0.005})`
+        });
+        $obj2.css({
+          transform: `translate(${-mx}px, ${-my}px) rotateY(${mx}deg)`
+        });
+        $obj3.css({
+          transform: `translate(${mx * 0.5}px, ${-my * 0.5}px) rotate(${mx}deg)`
+        });
+        $obj4.css({
+          transform: `translate(${mx / 0.5}px, ${-my / 0.5}px)`,
+          filter: `blur(${mx * 0.5}px)`
+        });
+        //부드럽게 반복
+        requestAnimationFrame(moving);
+      }
+
+      //3. 1,2번 실행하는 함수
+      function initAnimation() {
+        //좌표값 구하기
+        getOffset();
+        //움직임 실행
+        moving();
+      }
+      //함수 실행
+      initAnimation();
+
+
+
+    })
+  </script>
+
+</head>
+
+<body>
+  <div class="obj-wrap">
+    <div class="obj1"></div>
+    <div class="obj2"></div>
+    <div class="obj3"></div>
+    <div class="obj4"></div>
+  </div>
+
+  <div class="scroll-area">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum fuga rem dolorem dignissimos. Maxime iste omnis,
+      laborum, nostrum modi pariatur at itaque odit sit vero blanditiis. Vel, quod eaque ratione porro voluptas
+      molestias est eum consequuntur, quasi nesciunt, ipsum laudantium voluptates provident tempora ex magnam quisquam
+      officiis itaque! Fugiat consectetur provident velit eos minus nulla sed quae, ea libero deleniti accusantium
+      animi? Voluptates, laudantium? Corrupti corporis sed aut debitis est iste facilis nisi mollitia quis officia
+      temporibus consequatur minus incidunt perferendis dignissimos ea maxime, quos explicabo quisquam voluptas? Rem ex
+      voluptate odit a aspernatur officiis enim accusantium temporibus quos tempora!</p>
+  </div>
+</body>
+
+</html>

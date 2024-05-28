@@ -43,6 +43,7 @@
 
       //기본 속도
       let speed = 0.08;
+      //값 줄이면 느려짐
 
       //마우스가 움직이면
       $window.on('mousemove', function (e) {
@@ -50,12 +51,28 @@
         //좌표값 가져와서 x,y 변수에 할당
         x = e.pageX;
         y = e.pageY;
-        //cursor의 좌표값으로 적용
-        $cursor.css({ left: x, top: y });/* 속성 두개 이상이어서 {} 활용 */
 
-        //info창에 정보 뿌리기
-        $info.html(`x: ${x}<br>y: ${y}`);
+
       })
+
+      //마우스 위치값을 기본으로 해서 어떤 값을 만들자
+      function moving() {
+        //이게 6만원, 애니메이션 동작 만드는 공식이라고 생각하세요
+        mx += (x - mx) * speed;
+        my += (y - my) * speed;
+
+        //cursor의 좌표값으로 적용
+        $cursor.css({ left: mx, top: my });/* 속성 두개 이상이어서 {} 활용 */
+        //info창에 정보 뿌리기
+        $info.html(`mx: ${mx}<br>my: ${my}`);
+
+        //부드러운 반복
+        requestAnimationFrame(moving);
+      }
+
+      //함수의 실행
+      moving();
+
     })
   </script>
 </head>

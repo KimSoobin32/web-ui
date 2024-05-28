@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+// usage:   @include mdShadowLevel(1);
+@mixin mdShadowLevel($level) {
+  @if ($level == 5) {
+    box-shadow: 0px 40px 70px 0px rgba(0, 0, 0, 0.22),0px 27px 24px 0px rgba(0, 0, 0, 0.2);
+  } @else if ($level == 4){
+    box-shadow: 0px 25px 55px 0px rgba(0, 0, 0, 0.21),0px 16px 28px 0px rgba(0, 0, 0, 0.22);
+  } @else if ($level == 3){
+    box-shadow: 0px 17px 50px 0px rgba(0, 0, 0, 0.19),0px 12px 15px 0px rgba(0, 0, 0, 0.24);
+  } @else if ($level == 2){
+    box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.19),0px 8px 17px 0px rgba(0, 0, 0, 0.2);
+  }  @else if ($level == 1){
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.16),0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+  } @else{ // Aka Level 0:
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0),0px 0px 0px 0px rgba(0, 0, 0, 0);
+  } 
+}
+
+$multiply: 0.33;
+
+html{
+  font-size: 16px;
+}
+body{
+  height: 100vh;
+  background: #fcfbcf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fjalla One', sans-serif;
+}
+.container{
+  flex: 0 0 auto;
+  width: 1330px * $multiply;
+  height: 1790px * $multiply;
+  position: relative;
+  @include mdShadowLevel(1);
+  perspective: 800px;
+}
+h1{
+  margin: 0;
+  color: white;
+}
+.bg{
+  background: url("https://s3-ap-southeast-2.amazonaws.com/mephystoprojects/sam/bg.jpg");
+  width: 1330px * $multiply;
+  height: 1790px * $multiply;
+  background-size: cover;
+}
+
+.sam{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.body{
+  background: url("https://s3-ap-southeast-2.amazonaws.com/mephystoprojects/sam/body.png");
+  width: 891px * $multiply;
+  height: 779px * $multiply;
+  background-size: cover;
+    top: 484px * $multiply;
+    left: 240px * $multiply;
+}
+.arm{
+  background: url("https://s3-ap-southeast-2.amazonaws.com/mephystoprojects/sam/arm.png");
+  width: 313px * $multiply;
+  height: 415px * $multiply;
+  background-size: cover;
+  top: 716px * $multiply;
+  left: 292px * $multiply;
+  transform-origin: 25% 75%;
+}
+
+.hand{
+  background: url("https://s3-ap-southeast-2.amazonaws.com/mephystoprojects/sam/hand.png");
+  width: 186px * $multiply;
+  height: 218px * $multiply;
+  background-size: cover;
+    top: 628px * $multiply;
+    left: 520px * $multiply;
+}
+
+.face{
+  background: url("https://s3-ap-southeast-2.amazonaws.com/mephystoprojects/sam/face.png");
+  width: 478px * $multiply;
+  height: 717px * $multiply;
+  background-size: cover;
+    top: 104px * $multiply;
+    left: 394px * $multiply;
+}
+.text{
+  position: absolute;
+  bottom: 100px * $multiply;
+  left: 0;
+  width: 100%;
+  p {
+    color: #333;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 3rem;
+    text-shadow:
+    -1px -1px 0 crimson,
+    1px -1px 0 crimson,
+    -1px 1px 0 crimson,
+    1px 1px 0 crimson;
+    strong{
+      color: crimson;
+      text-shadow:
+      -1px -1px 0 #333,
+      1px -1px 0 #333,
+      -1px 1px 0 #333,
+      1px 1px 0 #333;
+      font-weight: normal;
+      font-size: 1.2em;
+    }
+  }
+}
+pre{
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 0;
+}

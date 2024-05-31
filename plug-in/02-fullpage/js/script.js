@@ -44,8 +44,8 @@ $(function () {
       if (anchorLink === 'section4') {
         $btnTop.fadeIn();
       }
-      AOS.init();
-      $aniEl.addClass('aos-animate');
+      AOS.init(); /* aos-init클래스 생김 */
+      $aniEl.addClass('aos-animate'); /* aos-animate 클래스 생김  */
     },
 
     //영역을 떠나갈 때

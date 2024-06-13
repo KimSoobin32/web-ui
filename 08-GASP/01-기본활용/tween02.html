@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tween 기본</title>
+  <style>
+    .wrap {
+      width: 70%;
+      margin: 50px auto;
+      border: 1px solid #000;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      margin-top: 30px;
+    }
+
+    .red {
+      background: red;
+      visibility: hidden;
+    }
+
+    .yellow {
+      background: yellow;
+    }
+
+    .blue {
+      background: blue;
+      visibility: hidden;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="box red"></div>
+    <div class="box yellow"></div>
+    <div class="box blue"></div>
+    <button id="btnGo">Go!</button>
+  </div>
+  <script>
+    //대상을 변수에 저장
+    const redBox = document.querySelector('.red');
+    const blueBox = document.querySelector('.blue');
+    const btnGo = document.querySelector('#btnGo');
+
+    // 위에서 밑으로 내려옴 (autoAlpha==토글처럼 알아서 세팅 해줌 -0은 안보임, autoAlpha 사용 시 css visibility: hidden;사용해줘야 함-웹접근성때문에)
+    gsap.from(redBox, {
+      y: -100,
+      rotation: 90,
+      duration: 2,
+      autoAlpha: 0,
+      delay: 2,
+
+      //repeat: 1=> 기본 애니메이션 +1번 반복
+      repeat: -1, //-1 => css --> infinite
+      yoyo: true, //css --> alternative
+
+      //https://gsap.com/resources/getting-started/Easing
+      ease: "bounce.out"
+    })
+    gsap.to('.yellow', {
+      rotation: 360, repeat: -1, ease: 'none'
+    })
+
+
+    //버튼을 클릭했을 때 애니메이션 되게끔
+    btnGo.addEventListener('click', () => {
+      gsap.to(blueBox, {
+        x: 400, duration: 1.5, autoAlpha: 1, ease: "bounce.out"
+      })
+    })
+
+
+  </script>
+</body>
+
+</html>

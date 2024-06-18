@@ -119,21 +119,19 @@ $(function () {
 
   //top 버튼 클릭하면 이동
   $('.btn-gotop').on('click', () => {
-    $('html, body')
-      .stop()
-      .animate(
-        {
-          scrollTop: 0,
-          // scrollTop: 요소의 offset 값
-        },
-        function () {
-          // $('.btn-gotop').fadeOut();
-          gsap.to('.btn-gotop', {
-            autoAlpha: 0,
-            y: -30,
-          });
-        }
-      );
+    $('html, body').stop().animate(
+      {
+        scrollTop: 0,
+        // scrollTop: 요소의 offset 값
+      }
+      // function () {
+      //   // $('.btn-gotop').fadeOut();
+      //   gsap.to('.btn-gotop', {
+      //     autoAlpha: 0,
+      //     y: -30,
+      //   });
+      // }
+    );
   });
 
   gsap.from('.btn-gotop', {
@@ -143,6 +141,7 @@ $(function () {
       trigger: '.about-con',
       // markers: true,
       start: 'top 50%',
+      toggleActions: 'play none reverse reverse',
     },
   });
 });

@@ -38,11 +38,21 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- loading.js를 각 페이지마다 호출하면 됨 -->
   <script>
     $(function () {
       const $window = $(window);
       const $body = $('body');
-      const $loading = $('.loading');
+      //`쓰면 문자열 줄바뀌어도 오류 안남
+      let $loading = `<div class="loading">
+                          <p>loading...</p>
+                        </div>`;
+
+      //loading 구조 삽입
+      $body.append($loading);
+
+      //jQuery 객체로 만들기
+      $loading = $('.loading');
 
       $window.on('load', function () {
         //로딩 완료 후 1초 뒤에 사라지게
@@ -57,9 +67,9 @@
 </head>
 
 <body>
-  <div class="loading">
+  <!-- <div class="loading">
     <p>loading...</p>
-  </div>
+  </div> -->
 
   <img src="https://media.timeout.com/images/105918414/image.jpg" alt="" />
   <img src="https://hips.hearstapps.com/hmg-prod/images/gettyimages-1136588786.jpg" alt="" />

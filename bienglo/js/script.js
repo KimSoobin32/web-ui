@@ -139,9 +139,13 @@ $(function () {
     y: 30,
     scrollTrigger: {
       trigger: '.about-con',
-      // markers: true,
+      markers: true,
       start: 'top 50%',
       toggleActions: 'play none reverse reverse',
+      onEnter: () => console.log('Enter'),
+      onLeave: () => console.log('Leave'),
+      onEnterBack: () => console.log('EnterBack'),
+      onLeaveBack: () => console.log('LeaveBack'),
     },
   });
 });

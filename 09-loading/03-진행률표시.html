@@ -43,10 +43,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <!-- imagesLoaded -->
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
     $(function () {
       const $window = $(window);
       const $body = $('body');
+      const $progress = $('.progress');
       const $progressBar = $('.progress-bar');
       const $progressText = $('.progress-text');
 
@@ -66,6 +68,9 @@
       //현재 로딩된 이미지 수
       let imgLoaded = 0;
 
+      //부드러운 진행률을 위한 변수
+      let current = 0;
+
       //이미지를 로딩할 때마다 imgLoaded를 증가
       imgLoad.on('progress', function () {
         imgLoaded++;
@@ -75,18 +80,28 @@
       function updateProgress() {
         //진행률 계산
         let percent = (imgLoaded / imgTotal) * 100;
+
+        //부드러운 갱신
+        current += (percent - current) * 0.05;
+
         //진행 정보를 업데이트
         // $progressText.text(percent);
-        $progressText.text(Math.floor(percent) + '%'); //내림->정수로만 보이게
+        $progressText.text(Math.floor(current) + '%'); //내림->정수로만 보이게
         //$progressBar 업데이트
-        $progressBar.css('width', Math.floor(percent) + '%');
+        $progressBar.css('width', Math.floor(current) + '%');
 
         //로딩 완료되었을 때
-        if (percent >= 100) {
+        if (current >= 100) {
           clearInterval(progressTimer);
           // $('.progress').fadeOut();
-          $('.progress').addClass('end');
+          // $('.progress').addClass('end');
+
+          const tl = gsap.timeline();
+          tl.to($progressBar, { xPercent: 100 });
+          tl.to($progressText, { scale: 2, autoAlpha: 0 }, '-=0.5');
+          tl.to($progress, { bottom: '100%' });
         }
+        if (current >= 99.9) { current = 100; }
       }
       //1초에 60번 진행 상황 파악을 반복 
       // setInterval(function () {

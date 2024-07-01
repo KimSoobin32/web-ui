@@ -1,0 +1,5 @@
+@charset 'utf-8';
+body.dark-mode {
+  background: #444;
+  color: #fff;
+}
